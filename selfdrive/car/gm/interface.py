@@ -161,6 +161,13 @@ class CarInterface(CarInterfaceBase):
       ret.steerRatio = 17.3
       ret.steerRatioRear = 0.
       ret.centerToFront = ret.wheelbase * 0.4  # wild guess
+      #PID tunning not to prevent oversteer
+      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[10., 25.0], [10., 25.0]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.1, 0.13], [0.005, 0.01]]
+      ret.lateralTuning.pid.kdBP = [0.]
+      ret.lateralTuning.pid.kdV = [0.7]  #corolla from shane fork : 0.725
+      ret.lateralTuning.pid.kf = 0.000038
+      tire_stiffness_factor = 0.5
 
     # TODO: get actual value, for now starting with reasonable value for
     # civic and scaling by mass and wheelbase
