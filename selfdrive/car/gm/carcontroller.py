@@ -12,7 +12,7 @@ VisualAlert = car.CarControl.HUDControl.VisualAlert
 
 class CarControllerParams():
   def __init__(self):
-    self.STEER_MAX = 300
+    self.STEER_MAX = 550
     self.STEER_STEP = 2              # how often we update the steer cmd
     self.STEER_DELTA_UP = 7          # ~0.75s time to peak torque (255/50hz/0.75s)
     self.STEER_DELTA_DOWN = 14       # ~0.3s from peak torque to zero
