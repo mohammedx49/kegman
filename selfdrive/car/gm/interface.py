@@ -154,11 +154,11 @@ class CarInterface(CarInterfaceBase):
     
     elif candidate == CAR.ESCALADE:
       # supports stop and go, but initial engage must be above 18mph (which include conservatism)
-      ret.minEnableSpeed =  -1.
+      ret.minEnableSpeed = 15 * CV.MPH_TO_MS
       ret.mass = 2645. + STD_CARGO_KG
       ret.safetyModel = car.CarParams.SafetyModel.gm
       ret.wheelbase = 3.30
-      ret.steerRatio = 15.5
+      ret.steerRatio = 17.3
       ret.steerRatioRear = 0.
       ret.centerToFront = ret.wheelbase * 0.4  # wild guess
       #PID tunning not to prevent oversteer
