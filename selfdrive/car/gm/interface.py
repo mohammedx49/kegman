@@ -197,8 +197,8 @@ class CarInterface(CarInterfaceBase):
 
     ret = self.CS.update(self.cp)
 
-
-    ret.cruiseState.enabled = self.CS.main_on
+    cruiseEnabled = self.CS.pcm_acc_status != AccState.OFF
+    ret.cruiseState.enabled = cruiseEnabled
 
     ret.readdistancelines = self.CS.follow_level
 
@@ -219,11 +219,11 @@ class CarInterface(CarInterfaceBase):
         be.pressed = False
         but = self.CS.prev_cruise_buttons
       if but == CruiseButtons.RES_ACCEL:
-        #if not (ret.cruiseState.enabled and ret.standstill):
+        if not (ret.cruiseState.enabled and ret.standstill):
         be.type = ButtonType.accelCruise  # Suppress resume button if we're resuming from stop so we don't adjust speed.
       elif but == CruiseButtons.DECEL_SET:
-        #if not cruiseEnabled and not self.CS.lkMode:
-        #  self.lkMode = True
+        if not cruiseEnabled and not self.CS.lkMode:
+          self.lkMode = True
         be.type = ButtonType.decelCruise
       elif but == CruiseButtons.CANCEL:
         be.type = ButtonType.cancel
@@ -232,6 +232,9 @@ class CarInterface(CarInterfaceBase):
       buttonEvents.append(be)
 
     ret.buttonEvents = buttonEvents
+
+    if cruiseEnabled and self.CS.lka_button and self.CS.lka_button != self.CS.prev_lka_button:
+      self.CS.lkMode = not self.CS.lkMode
 
     if self.CS.distance_button and self.CS.distance_button != self.CS.prev_distance_button:
        self.CS.follow_level -= 1
