@@ -18,7 +18,7 @@ EventName = car.CarEvent.EventName
 # ******************************************************************************************
 
 _AWARENESS_TIME = 70.  # one minute limit without user touching steering wheels make the car enter a terminal status
-#_AWARENESS_TIME = min(int(kegman.conf['wheelTouchSeconds']), 600)    # x minutes limit without user touching steering wheels make the car enter a terminal status
+_AWARENESS_TIME = min(int(kegman.conf['wheelTouchSeconds']), 600)    # x minutes limit without user touching steering wheels make the car enter a terminal status
 _AWARENESS_PRE_TIME_TILL_TERMINAL = 15.  # a first alert is issued 25s before expiration
 _AWARENESS_PROMPT_TIME_TILL_TERMINAL = 6.  # a second alert is issued 15s before start decelerating the car
 _DISTRACTED_TIME = 11.
