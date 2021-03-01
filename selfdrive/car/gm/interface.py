@@ -154,7 +154,7 @@ class CarInterface(CarInterfaceBase):
     
     elif candidate == CAR.ESCALADE:
       # supports stop and go, but initial engage must be above 18mph (which include conservatism)
-      ret.minEnableSpeed =  15 * CV.MPH_TO_MS
+      ret.minEnableSpeed =  -1.
       ret.mass = 2645. + STD_CARGO_KG
       ret.safetyModel = car.CarParams.SafetyModel.gm
       ret.wheelbase = 3.30
@@ -198,7 +198,7 @@ class CarInterface(CarInterfaceBase):
     ret = self.CS.update(self.cp)
 
  
-    ret.cruiseState.enabled = cruiseEnabled
+    ret.cruiseState.enabled = self.CS.main_on
 
     ret.readdistancelines = self.CS.follow_level
 
